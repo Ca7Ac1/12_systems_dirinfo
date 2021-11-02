@@ -22,7 +22,7 @@ int dir(char *path, char *format)
         {
             strcat(newPath, "/");
 
-            char newFormat = (strlen(format) + 1);
+            char newFormat[strlen(format) + 1];
             strcpy(newFormat, format);
             strcat(newFormat, "\t");
 
