@@ -12,24 +12,27 @@ int dir(char *path, char *format)
     DIR *d = opendir(path);
     struct dirent *entry = readdir(d);
 
-    while (entry)    {
+    while (entry)
+    {
         char newPath[strlen(path) + strlen(entry->d_name) + 1];
         strcpy(newPath, path);
         strcat(newPath, entry->d_name);
 
-      if (entry->d_type == DT_DIR)
+        if (entry->d_type == DT_DIR)
         {
-		
-            if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 && strcmp(entry->d_name, ".git") != 0)	    {
-	    	    
-            strcat(newPath, "/");
 
-            char newFormat[strlen(format) + 1];
-           strcpy(newFormat, format);
-            strcat(newFormat, "\t");
-		printf("%sFolder: %s\n", format, entry->d_name); 
-            total += dir(newPath, newFormat);
-        }}
+            if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 && strcmp(entry->d_name, ".git") != 0)
+            {
+
+                strcat(newPath, "/");
+
+                char newFormat[strlen(format) + 1];
+                strcpy(newFormat, format);
+                strcat(newFormat, "\t");
+                printf("%sFolder: %s\n", format, entry->d_name);
+                total += dir(newPath, newFormat);
+            }
+        }
         else
         {
             struct stat s;
@@ -44,7 +47,7 @@ int dir(char *path, char *format)
         entry = readdir(d);
     }
 
-    printf("\n%sTotal size:%u\n", format,  total);
+    printf("\n%sTotal size:%u\n", format, total);
     closedir(d);
 
     return total;
