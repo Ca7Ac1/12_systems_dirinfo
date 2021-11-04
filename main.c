@@ -22,8 +22,14 @@ int dir(char *path, char *format)
 
     while (entry)
     {
-        char newPath[strlen(path) + strlen(entry->d_name) + 1];
+        char newPath[strlen(path) + strlen(entry->d_name) + 2];
         strcpy(newPath, path);
+        
+        if (path[strlen(path) - 1] != '/')
+        {
+            strcat(newPath, "/");
+        }
+
         strcat(newPath, entry->d_name);
 
         if (entry->d_type == DT_DIR)
