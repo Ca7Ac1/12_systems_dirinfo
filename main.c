@@ -25,7 +25,7 @@ int dir(char *path, char *format)
         char newPath[strlen(path) + strlen(entry->d_name) + 2];
         strcpy(newPath, path);
         
-        if (path[strlen(path) - 1] != '/')
+        if (path[strlen(path) - 2] != '/')
         {
             strcat(newPath, "/");
         }
@@ -78,6 +78,11 @@ int main(int argc, char *argv[])
     else
     {
         fgets(path, sizeof(path) - 1, stdin);
+
+        if (path[strlen(path) - 2] == '\n')
+        {
+            path[strlen(path) - 2] = "\0";
+        }
     }
 
     dir(path, "");
