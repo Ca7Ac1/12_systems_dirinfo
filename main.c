@@ -10,6 +10,13 @@ int dir(char *path, char *format)
     int total = 0;
 
     DIR *d = opendir(path);
+
+    if (d == NULL)
+    {
+        printf("Exit due to error: %s", strerror(errno));
+        return -1;
+    }
+
     struct dirent *entry = readdir(d);
 
     while (entry)
@@ -53,8 +60,19 @@ int dir(char *path, char *format)
     return total;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    dir("./", "");
+    char path[100];
+
+    if (argc > 1)
+    {
+        path = strcpy(path, argv[1]);
+    }
+    else
+    {
+        fgets(path, sizeof(path) - 1, stdin);
+    }
+
+    dir(path, "");
     return 0;
 }
