@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 
         if (path[strlen(path) - 2] == '\n')
         {
-            path[strlen(path) - 2] = "\0";
+            path[strlen(path) - 2] = '\0';
         }
     }
 
